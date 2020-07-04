@@ -1,5 +1,4 @@
 #example usage python <nameofProgram> courseInfo.csv
-
 import csv
 import os
 import sys
@@ -9,11 +8,13 @@ import copy
 import shutil
 import getpass
 os.chdir(sys.path[0])
-BookStem="TeleHealth_"
-instructor_netid="mdtmp"
-dev_netid=getpass.getuser()
-startingLectureDescriptionIndex=1
+BookStem="PHY132_Summer_"
+instructor_netid="themmick"
+lastBookType=""
+# dev_netid=getpass.getuser()
+
 ##title='.'.join(sys.argv[1].split('/')[1][::-1].split(".")[1:])[::-1]
+bookMakerPath="../apache2/htdocs/bookMaker/"
 def fitem(item):
     item=item.strip()
     try:
@@ -32,19 +33,21 @@ for row in data:
         continue
     bookIndices.add(int(row["Book"]))
 
-print sorted(bookIndices)
+
 
 
 for idx in bookIndices:
+    startingLectureDescriptionIndex=1
     template=copy.deepcopy(t.template)
     localStorageKey=BookStem+str(idx)
     currentBook=filter(lambda x: x["Book"]==str(idx),data)
-    print currentBook
+
 
     template["chapters"][0]["title"]=localStorageKey.replace("_"," ")
 
     pages = {}
     for i,v in enumerate(currentBook):
+        print(v)
         lectureNumber = int(v['Lecture No.'])
 
         if not (lectureNumber  in pages):
@@ -53,14 +56,15 @@ for idx in bookIndices:
         if ":" in str(totalsecs):
             min,secs=totalsecs.split(":")[:2]
             totalsecs=int(min)*60+int(secs)
-        item = {'type':"video", 'title':v["Title"], 'content':v["Link"], 'duration':totalsecs}
+        item = {'type':"video", 'title':v["Title"], 'description':v["Description"],'content':v["Link"], 'duration':totalsecs}
         pages[lectureNumber].append(item)
     template["localStorageKey"]=localStorageKey
 
 
     for i in sorted (pages):
+        # print pages
         templateChapter=copy.deepcopy(template["chapters"][0])
-        templateChapter['content']="localData/TitlePdf/Lecture%d-descriptions.html"%(startingLectureDescriptionIndex)
+        templateChapter['content']="sourceFiles/html/descriptions.html#%s"%(startingLectureDescriptionIndex)
         templateChapter["pages"]=[]
         for j in pages[i]:
             templateChapter["pages"].append(j)
@@ -68,57 +72,16 @@ for idx in bookIndices:
         startingLectureDescriptionIndex+=1
     template["chapters"]=template["chapters"][1:]
     module= json.dumps(template, sort_keys=True,indent=4, separators=(',', ': '))
-
-    src="/Users/%s/Desktop/Apps/bookMaker/Users/dummyUser/Template" %(dev_netid)
-    dst="/Users/%s/Desktop/Apps/bookMaker/Users/%s/%s" %(dev_netid,instructor_netid,localStorageKey)
+    if v["Book Type"]!=lastBookType:
+        bookTypeOffset=idx-1
+    lastBookType=v["Book Type"]
+    src="%s/Users/dummyUser/Template" %(bookMakerPath)
+    dst="%s/Users/%s/%s%s_%s" %(bookMakerPath,instructor_netid,BookStem,v["Book Type"], idx-bookTypeOffset)
     #os.system("cp - '%s' '%s'" %(src,dst))
-    shutil.copytree(src,dst,symlinks=True)
+    #shutil.rmtree(dst)
+    try:
+        shutil.copytree(src,dst,symlinks=True)
+    except:
+        print("Directory exists, creating new module.json")
     f = open("%s/module.json"%(dst), "w")
     f.write(module)
-#
-#
-#
-#
-# template.template["chapters"][0]["title"]=title
-
-#
-# with open(sys.argv[1], 'r') as csvin:
-#     reader=csv.DictReader(csvin)
-#     data={k.strip():[fitem(v)] for k,v in reader.next().items()}
-#     for line in reader:
-#         for k,v in line.items():
-#             k=k.strip()
-#             data[k].append(fitem(v))
-#
-#
-# pages = {}
-# for i,v in enumerate(data["Link"]):
-#     lectureNumber = int( data['lectureNumber'][i])
-#
-#     if not (lectureNumber  in pages):
-#         pages[lectureNumber] =[]
-#     totalsecs = data["Duration (seconds)"][i]
-#     if ":" in str(totalsecs):
-#         print totalsecs
-#         min,secs=totalsecs.split(":")
-#         totalsecs=int(min)*60+int(secs)
-#     item = {'type':"video", 'title':data["Title"][i], 'content':data["Link"][i], 'duration':totalsecs}
-#     pages[data['lectureNumber'][i]].append(item)
-# template.template["localStorageKey"]=localStorageKey
-#
-#
-# for i in sorted (pages):
-#     templateChapter=copy.deepcopy(template.template["chapters"][0])
-#     templateChapter['content']="localData/TitlePdf/Lecture%d-descriptions.html"%(i)
-#     templateChapter["pages"]=[]
-#     for j in pages[i]:
-#         templateChapter["pages"].append(j)
-#     template.template["chapters"].append(templateChapter)
-# template.template["chapters"]=template.template["chapters"][1:]
-# module= json.dumps(template.template, sort_keys=True,indent=4, separators=(',', ': '))
-#
-# src="/Users/evannieuwenh/Desktop/Apps/bookMaker/Cycle 2.1"
-# dst="/Users/evannieuwenh/Desktop/Apps/bookMaker/%s" %(title)
-# os.system("cp -r '%s' '%s'" %(src,dst))
-# f = open("%s/module.json"%(dst), "w")
-# f.write(module)

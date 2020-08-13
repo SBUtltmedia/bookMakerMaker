@@ -1,0 +1,16 @@
+Folder,Title,Description,Link,Length,Lecture No.,No. Clicker questions,Book,Homework Assignment,Review Material,Book length,Book Type
+,Introduction to Viral Vector & Plasmid Vector,Viral vectors and plasmid vectors for genetic transfer,https://apps.tlt.stonybrook.edu/vq/meichan/500/,1:37,1,1,1,,,,Lecture
+,Viral Vectors,Introduction to viral vector,https://apps.tlt.stonybrook.edu/vq/meichan/501/,1:19,1,2,1,,,,Lecture
+,Lambda Phage,First example of viral vectors: Lambda Phage,https://apps.tlt.stonybrook.edu/vq/meichan/502/,0:50,1,1,1,,,,Lecture
+,"(i) Transduction, and (ii) Insertion & Replacement Vectors","(i) Transduction: genetic information transfer between bacteria with viral vector.  
+(ii) How do insertion & replacement vectors affect the total size of the gene and the later selection process differently.",https://apps.tlt.stonybrook.edu/vq/meichan/503/,5:13,1,3,1,,,,Lecture
+,Selection Marker Example 1,cI gene to control lytic cycle,https://apps.tlt.stonybrook.edu/vq/meichan/504/,3:13,1,1,1,,,,Lecture
+,Selection Marker Example 2,Lac Z gene for blue white screening,https://apps.tlt.stonybrook.edu/vq/meichan/505/,5:54,1,2,1,,,,Lecture
+,M13,Second example of viral vectors: M13 phage,https://apps.tlt.stonybrook.edu/vq/meichan/506/,3:56,1,2,1,,,,Lecture
+,Multiplicity of Infection (MOI),"MOI: the ratio of ""infection agent"" (e.g. virus particle) to ""infection target"" (e.g. cell)",https://apps.tlt.stonybrook.edu/vq/meichan/507/,3:39,1,3,1,,,,Lecture
+,Application (Recombinant Proteins),Applications of viral vectors,https://apps.tlt.stonybrook.edu/vq/meichan/508/,4:00,1,3,1,,,,Lecture
+,Plasmid Vectors,"Introduction to plasmid vector: size, conjugative vs. non-conjugative, copy number, and selectable markers",https://apps.tlt.stonybrook.edu/vq/meichan/509/,4:53,2,3,1,,,,Lecture
+,Plasmid Vectors Example,"(i) pBR322 as an example of plasmid vector
+(ii) Characteristics of a good vector",https://apps.tlt.stonybrook.edu/vq/meichan/510/,3:52,2,2,1,,,,Lecture
+,Cloning Vectors,Use of plasmid as a cloning vector,https://apps.tlt.stonybrook.edu/vq/meichan/511/,1:17,2,1,1,,,,Lecture
+,Cloning Vectors for Larger DNA Insertion,"YACs, BACs and PACs",https://apps.tlt.stonybrook.edu/vq/meichan/512/,4:42,2,3,1,,,20:25,Lecture

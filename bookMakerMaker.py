@@ -8,13 +8,13 @@ import copy
 import shutil
 import getpass
 os.chdir(sys.path[0])
-BookStem="PHY132_Summer_"
-instructor_netid="themmick"
+BookStem=sys.argv[3]
+instructor_netid=sys.argv[2]
 lastBookType=""
 # dev_netid=getpass.getuser()
 
 ##title='.'.join(sys.argv[1].split('/')[1][::-1].split(".")[1:])[::-1]
-bookMakerPath="../apache2/htdocs/bookMaker/"
+bookMakerPath="../../apache2/htdocs/bookMaker"
 def fitem(item):
     item=item.strip()
     try:
